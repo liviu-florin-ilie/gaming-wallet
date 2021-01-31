@@ -12,8 +12,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CreditMoneyCommand {
     @TargetAggregateIdentifier
-    private String transactionId;
     private String walletOwnerId;
-    private BigDecimal creditAmount;
+    private String transactionId;
+    private BigDecimal amount;
 
 }

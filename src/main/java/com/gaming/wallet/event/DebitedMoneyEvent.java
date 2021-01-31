@@ -5,8 +5,8 @@ import lombok.Value;
 import java.math.BigDecimal;
 
 @Value
-public class MoneyCreditedEvent {
-    private final String transactionId;
+public class DebitedMoneyEvent {
     private final String walletOwnerId;
-    private final BigDecimal creditAmount;
+    private final String transactionId;
+    private final BigDecimal amount;
 }

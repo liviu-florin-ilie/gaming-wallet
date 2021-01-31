@@ -20,12 +20,12 @@ public class WalletCommandService {
 
 
     public CompletableFuture<String> creditMoneyToWallet(String walletOwnerId, String transactionId, MoneyAmountDTO moneyCreditDTO) {
-        CreditMoneyCommand creditMoneyCommand = new CreditMoneyCommand(transactionId, walletOwnerId, moneyCreditDTO.getAmount());
+        CreditMoneyCommand creditMoneyCommand = new CreditMoneyCommand(walletOwnerId, transactionId,  moneyCreditDTO.getAmount());
         return this.commandGateway.send(creditMoneyCommand);
     }
 
     public CompletableFuture<String> debitMoneyFromWallet(String walletOwnerId, String transactionId, MoneyAmountDTO moneyDebitDTO) {
-        DebitMoneyCommand debitMoneyCommand = new DebitMoneyCommand(transactionId, walletOwnerId, moneyDebitDTO.getAmount());
+        DebitMoneyCommand debitMoneyCommand = new DebitMoneyCommand(walletOwnerId, transactionId, moneyDebitDTO.getAmount());
         return this.commandGateway.send(debitMoneyCommand);
     }
 

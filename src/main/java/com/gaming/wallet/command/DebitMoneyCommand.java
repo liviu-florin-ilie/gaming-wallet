@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class DebitMoneyCommand {
     @TargetAggregateIdentifier
-    private String transactionId;
     private String walletOwnerId;
+    private String transactionId;
     private BigDecimal amount;
 }

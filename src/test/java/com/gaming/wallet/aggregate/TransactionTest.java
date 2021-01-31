@@ -1,14 +1,17 @@
 package com.gaming.wallet.aggregate;
 
+import com.gaming.wallet.command.CreateWalletCommand;
 import com.gaming.wallet.command.CreditMoneyCommand;
-import com.gaming.wallet.event.MoneyCreditedEvent;
+import com.gaming.wallet.command.DebitMoneyCommand;
+import com.gaming.wallet.event.CreatedWalletEvent;
+import com.gaming.wallet.event.CreditedMoneyEvent;
+import com.gaming.wallet.event.DebitedMoneyEvent;
 import org.axonframework.test.aggregate.AggregateTestFixture;
 import org.axonframework.test.aggregate.FixtureConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class TransactionTest {
     private static final String customerName = "XXX";
@@ -19,7 +22,7 @@ public class TransactionTest {
     @BeforeEach
     public void setUp() {
         fixture = new AggregateTestFixture<>(WalletAggregate.class);
-        id = UUID.randomUUID().toString();
+        id = "1";
     }
 
 
@@ -47,20 +50,75 @@ public class TransactionTest {
                         expectedTradeEvent);
     }*/
 
+    @Test
+    public void should_dispatch_accountcreated_event_when_createaccount_command() {
+        fixture.givenNoPriorActivity()
+                .when(new CreateWalletCommand(
+                        id,
+                        BigDecimal.valueOf(1000),
+                        customerName)
+                )
+                .expectEvents(new CreatedWalletEvent(
+                        id,
+                        BigDecimal.valueOf(1000),
+                        customerName)
+                );
+    }
+
 
     @Test
-    public void should_dispatch_moneycredited_event_when_balance_is_lower_than_debit_amount() {
+    public void should_dispatch_moneycredited_event() {
+        CreatedWalletEvent createdWalletEvent = new CreatedWalletEvent(
+                id,
+                BigDecimal.valueOf(1000),
+                customerName);
 
         CreditMoneyCommand creditMoneyCommand = new CreditMoneyCommand(
                 id,
-                customerName,
+                "1",
                 BigDecimal.valueOf(100));
-        MoneyCreditedEvent moneyCreditedEvent = new MoneyCreditedEvent(
+        CreditedMoneyEvent moneyCreditedEvent = new CreditedMoneyEvent(
+                "1",
                 id,
-                customerName,
                 BigDecimal.valueOf(100));
 
-        fixture.givenNoPriorActivity().when(creditMoneyCommand)
+        fixture.given(createdWalletEvent).when(creditMoneyCommand)
                 .expectEvents(moneyCreditedEvent);
+    }
+
+    @Test
+    public void should_dispatch_moneydebited_event_when_balance_is_greater_than_debit_amount() {
+        CreatedWalletEvent createdWalletEvent = new CreatedWalletEvent(
+                id,
+                BigDecimal.valueOf(1000),
+                customerName);
+
+        DebitMoneyCommand debitMoneyCommand = new DebitMoneyCommand(
+                id,
+                "1",
+                BigDecimal.valueOf(100));
+        DebitedMoneyEvent debitedMoneyEvent = new DebitedMoneyEvent(
+                id,
+                "1",
+                BigDecimal.valueOf(100));
+
+        fixture.given(createdWalletEvent).when(debitMoneyCommand)
+                .expectEvents(debitedMoneyEvent);
+    }
+
+
+    @Test
+    public void should_not_dispatch_event_when_balance_is_lower_than_debit_amount() {
+        fixture.given(new CreatedWalletEvent(
+                id,
+                BigDecimal.valueOf(1000),
+                customerName))
+                .when(
+                        new DebitMoneyCommand(
+                                id,
+                                "1",
+                                BigDecimal.valueOf(5000))
+                )
+                .expectNoEvents();
     }
 }

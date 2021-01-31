@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -21,9 +20,9 @@ public class WalletQueryController {
     private final WalletQueryService walletQueryService;
 
     @GetMapping("/{walletOwnerId}")
-    public Wallet findById(@PathVariable("walletOwnerId") String walletOwnerId) {
-        Optional<Wallet> byId = this.walletQueryService.findById(walletOwnerId);
-        return byId.get();
+    public CompletableFuture<Wallet> findById(@PathVariable("walletOwnerId") String walletOwnerId) {
+        CompletableFuture<Wallet> byId = this.walletQueryService.findById(walletOwnerId);
+        return byId;
     }
 
     @GetMapping("/{walletOwnerId}/events")
