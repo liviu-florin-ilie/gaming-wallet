@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreditMoneyCommand {
+public class CreditMoneyCommand implements MoneyCommand{
     @TargetAggregateIdentifier
     private String walletOwnerId;
     private String transactionId;

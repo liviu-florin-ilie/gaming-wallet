@@ -25,4 +25,8 @@ public class Transaction {
     private TransactionType type;
     private Timestamp timestamp;
     private BigDecimal amount;
+
+    public Transaction(String id) {
+        this.id = id;
+    }
 }

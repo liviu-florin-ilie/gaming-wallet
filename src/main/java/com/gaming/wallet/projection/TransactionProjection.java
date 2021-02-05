@@ -32,7 +32,7 @@ public class TransactionProjection {
                 new Timestamp(new Date().getTime()),
                 evt.getAmount()
         );
-        Assert.isTrue(repository.existsById(transaction.getId()), "The transactionid has already been used"+ transaction.getId() );
+//        Assert.isTrue(repository.existsById(transaction.getId()), "The transactionid has already been used:" + transaction.getId());
         repository.save(transaction);
     }
 
@@ -44,35 +44,8 @@ public class TransactionProjection {
                 new Timestamp(new Date().getTime()),
                 evt.getAmount()
         );
-        Assert.isTrue(repository.existsById(transaction.getId()), "The transactionid has already been used"+ transaction.getId() );
+//        Assert.isTrue(repository.existsById(transaction.getId()), "The transactionid has already been used" + transaction.getId());
         repository.save(transaction);
     }
 
-
-    /*private void checkTransaction(String transactionId) {
-        boolean empty = eventStore.readEvents(transactionId).asStream()
-                .map(Message::getPayload)
-                .collect(Collectors.toList()).isEmpty();
-        Assert.isTrue(!empty, "The transactionId is already used: " + transactionId);
-    }*/
-
-   /* @EventHandler
-    public void on(RedeemedEvt evt) {
-        transactions.stream()
-                .filter(cs -> evt.getId().equals(cs.getId()))
-                .findFirst()
-                .ifPresent(cardSummary -> {
-                    CardSummary updatedCardSummary = cardSummary.deductAmount(evt.getAmount());
-                    transactions.remove(cardSummary);
-                    transactions.add(updatedCardSummary);
-                });
-    }
-
-    @QueryHandler // (2)
-    public List<CardSummary> fetch(FetchCardSummariesQuery query) {
-        return transactions.stream()
-                .skip(query.getOffset())
-                .limit(query.getSize())
-                .collect(Collectors.toList());
-    }*/
 }
