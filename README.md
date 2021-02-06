@@ -37,21 +37,28 @@
   
    * Credit commands 
     
-    curl -X PUT "http://localhost:8080/wallet/credit/c9b548d6-3cc1-4641-bdcf-66e3886de53f/1" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"amount\": 110}"
-    curl -X PUT "http://localhost:8080/wallet/debit/c9b548d6-3cc1-4641-bdcf-66e3886de53f/4" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"amount\": 50}"
+    curl -X PUT "http://localhost:8080/wallet/credit/yourWalletID/yourTransactionId" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"amount\": 110}"
+    curl -X PUT "http://localhost:8080/wallet/debit/yourWalletID/yourTransactionId" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"amount\": 50}"
    
    * Query commands
     
-    curl -X GET "http://localhost:8080/wallet/c9b548d6-3cc1-4641-bdcf-66e3886de53f" -H "accept: */*"
-    curl -X GET "http://localhost:8080/wallet/c9b548d6-3cc1-4641-bdcf-66e3886de53f/events" -H "accept: */*"
+    curl -X GET "http://localhost:8080/wallet/yourWalletID" -H "accept: */*"
+    curl -X GET "http://localhost:8080/wallet/yourWalletID/events" -H "accept: */*"
     
- # What else neeeds to be done:
+ # What else needs to be done:
    * Logging
    * Security 
    * Containerization
    * Load testing 
    * The existing transaction check is a sensitive issue at it will need another approach as the table grows. For example, implement
    a caching solution: https://hazelcast.com/use-cases/jcache-provider/
-     
+   * More detailed error handling  
     
- 
+ # Application flow
+    @RestController
+        => @Service
+                => @Aggregate
+                    => @CommandHandler
+                            => @EventHandler
+                                    => operations on @Aggregate 
+                                    => *Projection => @Repository
