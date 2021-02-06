@@ -1,11 +1,11 @@
-package com.gaming.wallet.projection;
+package com.gaming.wallet.axon.projection;
 
-import com.gaming.wallet.entity.Wallet;
-import com.gaming.wallet.event.CreatedWalletEvent;
-import com.gaming.wallet.event.CreditedMoneyEvent;
-import com.gaming.wallet.event.DebitedMoneyEvent;
-import com.gaming.wallet.query.FindWalletQuery;
-import com.gaming.wallet.repository.WalletRepository;
+import com.gaming.wallet.axon.entity.Wallet;
+import com.gaming.wallet.axon.event.CreatedWalletEvent;
+import com.gaming.wallet.axon.event.CreditedMoneyEvent;
+import com.gaming.wallet.axon.event.DebitedMoneyEvent;
+import com.gaming.wallet.axon.query.FindWalletQuery;
+import com.gaming.wallet.axon.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.eventhandling.EventHandler;

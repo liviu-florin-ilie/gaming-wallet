@@ -1,15 +1,14 @@
-package com.gaming.wallet.projection;
+package com.gaming.wallet.axon.projection;
 
-import com.gaming.wallet.entity.Transaction;
-import com.gaming.wallet.entity.TransactionType;
-import com.gaming.wallet.event.CreditedMoneyEvent;
-import com.gaming.wallet.event.DebitedMoneyEvent;
-import com.gaming.wallet.repository.TransactionRepository;
+import com.gaming.wallet.axon.entity.Transaction;
+import com.gaming.wallet.axon.entity.TransactionType;
+import com.gaming.wallet.axon.event.CreditedMoneyEvent;
+import com.gaming.wallet.axon.event.DebitedMoneyEvent;
+import com.gaming.wallet.axon.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import java.sql.Timestamp;
 import java.util.Date;

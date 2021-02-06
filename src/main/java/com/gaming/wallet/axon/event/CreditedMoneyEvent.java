@@ -1,4 +1,4 @@
-package com.gaming.wallet.event;
+package com.gaming.wallet.axon.event;
 
 import lombok.Value;
 

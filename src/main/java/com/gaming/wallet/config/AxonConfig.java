@@ -5,7 +5,7 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.commandhandling.gateway.DefaultCommandGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.gaming.wallet.projection.validation.*;
+import com.gaming.wallet.axon.projection.validation.*;
 
 @Configuration
 public class AxonConfig {

@@ -1,6 +1,6 @@
 package com.gaming.wallet.rest.dto;
 
-import com.gaming.wallet.event.MoneyEvent;
+import com.gaming.wallet.axon.event.MoneyEvent;
 import lombok.Value;
 
 import java.time.Instant;

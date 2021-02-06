@@ -1,9 +1,9 @@
 package com.gaming.wallet.service;
 
-import com.gaming.wallet.command.CreateWalletCommand;
-import com.gaming.wallet.command.CreditMoneyCommand;
-import com.gaming.wallet.command.DebitMoneyCommand;
-import com.gaming.wallet.entity.Wallet;
+import com.gaming.wallet.axon.command.CreateWalletCommand;
+import com.gaming.wallet.axon.command.CreditMoneyCommand;
+import com.gaming.wallet.axon.command.DebitMoneyCommand;
+import com.gaming.wallet.axon.entity.Wallet;
 import com.gaming.wallet.rest.dto.MoneyAmountDTO;
 import com.gaming.wallet.rest.dto.WalletCreationDTO;
 import lombok.AllArgsConstructor;

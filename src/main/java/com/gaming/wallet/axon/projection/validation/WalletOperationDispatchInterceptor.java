@@ -1,13 +1,14 @@
-package com.gaming.wallet.projection.validation;
+package com.gaming.wallet.axon.projection.validation;
 
-import com.gaming.wallet.command.CreditMoneyCommand;
-import com.gaming.wallet.command.DebitMoneyCommand;
-import com.gaming.wallet.command.MoneyCommand;
-import com.gaming.wallet.repository.TransactionRepository;
+import com.gaming.wallet.axon.command.CreditMoneyCommand;
+import com.gaming.wallet.axon.command.DebitMoneyCommand;
+import com.gaming.wallet.axon.command.MoneyCommand;
+import com.gaming.wallet.axon.repository.TransactionRepository;
 import org.axonframework.commandhandling.CommandMessage;
 import org.axonframework.messaging.MessageDispatchInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -23,10 +24,8 @@ public class WalletOperationDispatchInterceptor implements MessageDispatchInterc
 
             if (CreditMoneyCommand.class.equals(m.getPayloadType()) || DebitMoneyCommand.class.equals(m.getPayloadType())) {
                 final MoneyCommand moneyCommand = (MoneyCommand) m.getPayload();
-                if (transactionRepository.existsById(moneyCommand.getTransactionId())) {
-                    throw new IllegalStateException(String.format("Transaction already exists: ", moneyCommand.getTransactionId()
-                    ));
-                }
+                boolean existsById = transactionRepository.existsById(moneyCommand.getTransactionId());
+                Assert.isTrue(!existsById, "Transaction already exists: " + moneyCommand.getTransactionId() );
             }
             return m;
         };

@@ -1,4 +1,4 @@
-package com.gaming.wallet.command;
+package com.gaming.wallet.axon.command;
 
 public interface MoneyCommand {
     String getTransactionId();

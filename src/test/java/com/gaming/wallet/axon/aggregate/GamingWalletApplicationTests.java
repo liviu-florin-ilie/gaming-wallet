@@ -1,4 +1,4 @@
-package com.gaming.wallet.aggregate;
+package com.gaming.wallet.axon.aggregate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

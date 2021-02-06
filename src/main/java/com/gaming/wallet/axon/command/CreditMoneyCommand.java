@@ -1,4 +1,4 @@
-package com.gaming.wallet.command;
+package com.gaming.wallet.axon.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,9 +10,10 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DebitMoneyCommand implements MoneyCommand{
+public class CreditMoneyCommand implements MoneyCommand{
     @TargetAggregateIdentifier
     private String walletOwnerId;
     private String transactionId;
     private BigDecimal amount;
+
 }

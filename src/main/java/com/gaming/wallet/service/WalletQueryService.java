@@ -1,13 +1,11 @@
 package com.gaming.wallet.service;
 
-import com.gaming.wallet.entity.Wallet;
-import com.gaming.wallet.event.MoneyEvent;
-import com.gaming.wallet.query.FindWalletQuery;
+import com.gaming.wallet.axon.entity.Wallet;
+import com.gaming.wallet.axon.query.FindWalletQuery;
 import com.gaming.wallet.rest.dto.WalletHistoryDTO;
 import lombok.AllArgsConstructor;
 import org.axonframework.eventhandling.DomainEventMessage;
 import org.axonframework.eventsourcing.eventstore.EventStore;
-import org.axonframework.messaging.Message;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.stereotype.Service;

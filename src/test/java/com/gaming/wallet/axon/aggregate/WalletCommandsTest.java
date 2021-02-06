@@ -1,11 +1,11 @@
-package com.gaming.wallet.aggregate;
+package com.gaming.wallet.axon.aggregate;
 
-import com.gaming.wallet.command.CreateWalletCommand;
-import com.gaming.wallet.command.CreditMoneyCommand;
-import com.gaming.wallet.command.DebitMoneyCommand;
-import com.gaming.wallet.event.CreatedWalletEvent;
-import com.gaming.wallet.event.CreditedMoneyEvent;
-import com.gaming.wallet.event.DebitedMoneyEvent;
+import com.gaming.wallet.axon.command.CreateWalletCommand;
+import com.gaming.wallet.axon.command.CreditMoneyCommand;
+import com.gaming.wallet.axon.command.DebitMoneyCommand;
+import com.gaming.wallet.axon.event.CreatedWalletEvent;
+import com.gaming.wallet.axon.event.CreditedMoneyEvent;
+import com.gaming.wallet.axon.event.DebitedMoneyEvent;
 import org.axonframework.test.aggregate.AggregateTestFixture;
 import org.axonframework.test.aggregate.FixtureConfiguration;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,19 +13,17 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-public class TransactionTest {
+public class WalletCommandsTest {
     private static final String customerName = "XXX";
 
     private FixtureConfiguration<WalletAggregate> fixture;
-    private String id;
+    private String walletId;
 
     @BeforeEach
     public void setUp() {
         fixture = new AggregateTestFixture<>(WalletAggregate.class);
-        id = "1";
+        walletId = "1";
     }
-
-
 
    /* @Test
     public void testSimpleTradeExecution() {
@@ -51,15 +49,15 @@ public class TransactionTest {
     }*/
 
     @Test
-    public void should_dispatch_accountcreated_event_when_createaccount_command() {
+    public void should_dispatch_createdwallet_event_when_createawallet_command() {
         fixture.givenNoPriorActivity()
                 .when(new CreateWalletCommand(
-                        id,
+                        walletId,
                         BigDecimal.valueOf(1000),
                         customerName)
                 )
                 .expectEvents(new CreatedWalletEvent(
-                        id,
+                        walletId,
                         BigDecimal.valueOf(1000),
                         customerName)
                 );
@@ -67,19 +65,19 @@ public class TransactionTest {
 
 
     @Test
-    public void should_dispatch_moneycredited_event() {
+    public void should_dispatch_creditedmoney_event() {
         CreatedWalletEvent createdWalletEvent = new CreatedWalletEvent(
-                id,
+                walletId,
                 BigDecimal.valueOf(1000),
                 customerName);
 
         CreditMoneyCommand creditMoneyCommand = new CreditMoneyCommand(
-                id,
+                walletId,
                 "1",
                 BigDecimal.valueOf(100));
         CreditedMoneyEvent moneyCreditedEvent = new CreditedMoneyEvent(
                 "1",
-                id,
+                walletId,
                 BigDecimal.valueOf(100));
 
         fixture.given(createdWalletEvent).when(creditMoneyCommand)
@@ -87,18 +85,18 @@ public class TransactionTest {
     }
 
     @Test
-    public void should_dispatch_moneydebited_event_when_balance_is_greater_than_debit_amount() {
+    public void should_dispatch_debitedmoney_event_when_balance_is_greater_than_debit_amount() {
         CreatedWalletEvent createdWalletEvent = new CreatedWalletEvent(
-                id,
+                walletId,
                 BigDecimal.valueOf(1000),
                 customerName);
 
         DebitMoneyCommand debitMoneyCommand = new DebitMoneyCommand(
-                id,
+                walletId,
                 "1",
                 BigDecimal.valueOf(100));
         DebitedMoneyEvent debitedMoneyEvent = new DebitedMoneyEvent(
-                id,
+                walletId,
                 "1",
                 BigDecimal.valueOf(100));
 
@@ -106,19 +104,19 @@ public class TransactionTest {
                 .expectEvents(debitedMoneyEvent);
     }
 
-
     @Test
     public void should_not_dispatch_event_when_balance_is_lower_than_debit_amount() {
         fixture.given(new CreatedWalletEvent(
-                id,
+                walletId,
                 BigDecimal.valueOf(1000),
                 customerName))
                 .when(
                         new DebitMoneyCommand(
-                                id,
+                                walletId,
                                 "1",
                                 BigDecimal.valueOf(5000))
                 )
                 .expectNoEvents();
     }
+
 }

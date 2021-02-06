@@ -1,6 +1,6 @@
 package com.gaming.wallet.rest;
 
-import com.gaming.wallet.entity.Wallet;
+import com.gaming.wallet.axon.entity.Wallet;
 import com.gaming.wallet.rest.dto.MoneyAmountDTO;
 import com.gaming.wallet.rest.dto.WalletCreationDTO;
 import com.gaming.wallet.service.WalletCommandService;

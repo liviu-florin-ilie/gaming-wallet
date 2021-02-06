@@ -1,6 +1,6 @@
 package com.gaming.wallet.rest;
 
-import com.gaming.wallet.entity.Wallet;
+import com.gaming.wallet.axon.entity.Wallet;
 import com.gaming.wallet.rest.dto.WalletHistoryDTO;
 import com.gaming.wallet.service.WalletQueryService;
 import io.swagger.annotations.Api;
@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping(value = "/wallets")
-@Api(value = "Wallet Queries", description = "Wallet Query Events API")
+@RequestMapping(value = "/wallet")
+@Api(value = "Wallet Queries", description = "Wallet Query API")
 @AllArgsConstructor
 public class WalletQueryController {
     private final WalletQueryService walletQueryService;

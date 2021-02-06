@@ -1,4 +1,4 @@
-package com.gaming.wallet.query;
+package com.gaming.wallet.axon.query;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

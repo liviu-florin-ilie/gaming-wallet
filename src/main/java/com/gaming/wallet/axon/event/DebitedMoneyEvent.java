@@ -1,6 +1,6 @@
-package com.gaming.wallet.event;
+package com.gaming.wallet.axon.event;
 
-import com.gaming.wallet.command.MoneyCommand;
+import com.gaming.wallet.axon.command.MoneyCommand;
 import lombok.Value;
 
 import java.math.BigDecimal;

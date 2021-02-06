@@ -1,11 +1,11 @@
-package com.gaming.wallet.aggregate;
+package com.gaming.wallet.axon.aggregate;
 
-import com.gaming.wallet.command.CreateWalletCommand;
-import com.gaming.wallet.command.CreditMoneyCommand;
-import com.gaming.wallet.command.DebitMoneyCommand;
-import com.gaming.wallet.event.CreatedWalletEvent;
-import com.gaming.wallet.event.CreditedMoneyEvent;
-import com.gaming.wallet.event.DebitedMoneyEvent;
+import com.gaming.wallet.axon.command.CreateWalletCommand;
+import com.gaming.wallet.axon.command.CreditMoneyCommand;
+import com.gaming.wallet.axon.command.DebitMoneyCommand;
+import com.gaming.wallet.axon.event.CreatedWalletEvent;
+import com.gaming.wallet.axon.event.CreditedMoneyEvent;
+import com.gaming.wallet.axon.event.DebitedMoneyEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
