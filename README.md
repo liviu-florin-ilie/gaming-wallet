@@ -9,9 +9,26 @@
         2. start the app with  mvn spring-boot:run from the roor folder
     
 # Testing 
-    You got a Swagger-ui interface : http://localhost:8080/swagger-ui.html
-    You got H2 Console: http://localhost:8080/h2-console/
-        
+   * You got a Swagger-ui interface : http://localhost:8080/swagger-ui.html
+   * You got H2 Console: http://localhost:8080/h2-console/
+   * The Axon server can  also be checked: http://localhost:8024/    
+ # Frameworks
+   * Spring boot
+   * Axon Framework
+   * H2
+   * Swagger
+    
+ # Choices
+    I chose to go with CQRS and ES and chose for that Axon Framework and Axon Server
+    CQRS + ES comes with some inherent advantages:
+   * extremely get accurate audit logging for free
+   * the ability to run temporal queries
+   * it extremely easy to reconstruct the historical state of the object
+   * we can clearly see the sequence of events occurring on the wallet account
+   * Axon is a lightweight framework that helps in building microservices
+   * 
+    
+    
     
  
     
