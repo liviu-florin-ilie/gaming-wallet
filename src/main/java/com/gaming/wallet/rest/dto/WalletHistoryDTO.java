@@ -8,8 +8,6 @@ import java.time.Instant;
 @Value
 public class WalletHistoryDTO {
     private String eventType;
-
     private Object event;
-
     private Instant timestamp;
 }

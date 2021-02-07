@@ -23,7 +23,7 @@ public class WalletProjection {
 
     @EventHandler
     public void on(CreatedWalletEvent event) {
-        log.debug("Handling a Wallet creation command {}", event.getWalletId());
+        log.debug("Handling a Wallet creation event ", event.getWalletId());
         Wallet wallet = new Wallet(event.getWalletId(), event.getUsername(), event.getInitialBalance());
         repository.save(wallet);
     }
@@ -31,7 +31,7 @@ public class WalletProjection {
     @EventHandler
     public void on(CreditedMoneyEvent event) {
         String transactionId = event.getTransactionId();
-        log.debug("Handling an Wallet Credit command {}", transactionId);
+        log.debug("Handling an Wallet Credit command ", transactionId);
 
         WalletRepository repository = this.repository;
         Optional<Wallet> walletOptional = getWallet(event.getWalletOwnerId(), repository);
@@ -44,8 +44,7 @@ public class WalletProjection {
     @EventHandler
     public void on(DebitedMoneyEvent event) {
         String transactionId = event.getTransactionId();
-        log.debug("Handling an Wallet Debit command {}", transactionId);
-//        checkTransaction(transactionId);
+        log.debug("Handling an Wallet Debit command ", transactionId);
         Optional<Wallet> walletOptional = getWallet(event.getWalletOwnerId(), repository);
         Wallet playerWallet = walletOptional.get();
         playerWallet.setBalance(playerWallet.getBalance().subtract(event.getAmount()));
@@ -54,7 +53,7 @@ public class WalletProjection {
 
     @QueryHandler
     public Wallet handle(FindWalletQuery query) {
-        log.debug("Handling FindWalletQuery query: {}", query);
+        log.debug("Handling FindWalletQuery query ", query);
         return this.repository.findById(query.getWalletOwnerId()).orElse(null);
     }
 

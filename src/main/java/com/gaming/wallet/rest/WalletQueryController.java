@@ -21,16 +21,16 @@ import java.util.concurrent.CompletableFuture;
 public class WalletQueryController {
     private final WalletQueryService walletQueryService;
 
-    @GetMapping("/{walletOwnerId}")
-    @ApiOperation("This is retrieves the current state of the Wallet Account")
+    @GetMapping("/{walletOwnerId}/balance")
+    @ApiOperation("Retrieves the current state of the Wallet Account")
     public CompletableFuture<Wallet> findById(@PathVariable("walletOwnerId") String walletOwnerId) {
         CompletableFuture<Wallet> byId = this.walletQueryService.findById(walletOwnerId);
         return byId;
     }
 
     @GetMapping("/{walletOwnerId}/events")
-    @ApiOperation("This lists all the operations on the Wallet Account")
-    public List<WalletHistoryDTO> listEventsForAccount(@PathVariable(value = "walletOwnerId") String walletOwnerId) {
+    @ApiOperation("Lists all the operations/events on the Wallet Account")
+    public CompletableFuture<List<WalletHistoryDTO>> listEventsForAccount(@PathVariable(value = "walletOwnerId") String walletOwnerId) {
         return this.walletQueryService.listEventsForAccount(walletOwnerId);
     }
 

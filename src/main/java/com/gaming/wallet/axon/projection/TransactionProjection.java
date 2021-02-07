@@ -31,7 +31,6 @@ public class TransactionProjection {
                 new Timestamp(new Date().getTime()),
                 evt.getAmount()
         );
-//        Assert.isTrue(repository.existsById(transaction.getId()), "The transactionid has already been used:" + transaction.getId());
         repository.save(transaction);
     }
 
@@ -43,7 +42,6 @@ public class TransactionProjection {
                 new Timestamp(new Date().getTime()),
                 evt.getAmount()
         );
-//        Assert.isTrue(repository.existsById(transaction.getId()), "The transactionid has already been used" + transaction.getId());
         repository.save(transaction);
     }
 

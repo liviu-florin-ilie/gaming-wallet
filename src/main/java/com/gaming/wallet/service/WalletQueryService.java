@@ -26,9 +26,9 @@ public class WalletQueryService {
                 new FindWalletQuery(walletOwnerId), ResponseTypes.instanceOf(Wallet.class));
     }
 
-    public  List<WalletHistoryDTO> listEventsForAccount(String walletOwnerId) {
-
-        return eventStore.readEvents(walletOwnerId).asStream().map(this::domainEventToAggregateHistory).collect(Collectors.toList());
+    public CompletableFuture<List<WalletHistoryDTO>> listEventsForAccount(String walletOwnerId) {
+        List<WalletHistoryDTO> collect = eventStore.readEvents(walletOwnerId).asStream().map(this::domainEventToAggregateHistory).collect(Collectors.toList());
+        return CompletableFuture.supplyAsync(() -> collect);
     }
 
     private WalletHistoryDTO domainEventToAggregateHistory(DomainEventMessage<?> event)

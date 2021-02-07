@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
-public class MoneyAmountDTO {
+public class MoneyTransactionDTO {
     private BigDecimal amount;
+    private String transactionId;
 }

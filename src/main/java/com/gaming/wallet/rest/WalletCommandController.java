@@ -1,7 +1,7 @@
 package com.gaming.wallet.rest;
 
 import com.gaming.wallet.axon.entity.Wallet;
-import com.gaming.wallet.rest.dto.MoneyAmountDTO;
+import com.gaming.wallet.rest.dto.MoneyTransactionDTO;
 import com.gaming.wallet.rest.dto.WalletCreationDTO;
 import com.gaming.wallet.service.WalletCommandService;
 import io.swagger.annotations.Api;
@@ -29,20 +29,18 @@ public class WalletCommandController {
     }
 
 
-    @PutMapping(value = "/credit/{walletOwnerId}/{transactionId}")
-    @ApiOperation(value = "Adds the specified amount into  the Wallet Account")
+    @PutMapping(value = "/credit/{walletOwnerId}")
+    @ApiOperation(value = "Adds the specified amount into the Wallet Account")
     public CompletableFuture<String> creditMoneyToWallet(@PathVariable(value = "walletOwnerId") String walletOwnerId,
-                                                         @PathVariable(value = "transactionId") String transactionId,
-                                                         @RequestBody MoneyAmountDTO moneyCreditDTO) {
-        return this.accountCommandService.creditMoneyToWallet(walletOwnerId, transactionId, moneyCreditDTO);
+                                                         @RequestBody MoneyTransactionDTO moneyCreditDTO) {
+        return this.accountCommandService.creditMoneyToWallet(walletOwnerId, moneyCreditDTO);
     }
 
-    @PutMapping(value = "/debit/{walletOwnerId}/{transactionId}")
-    @ApiOperation(value="Pulls out money from the Wallet Account")
+    @PutMapping(value = "/debit/{walletOwnerId}")
+    @ApiOperation(value="Pulls out the specified amount from the Wallet Account")
     public CompletableFuture<String> debitMoneyFromWallet(@PathVariable(value = "walletOwnerId") String walletOwnerId,
-                                                          @PathVariable(value = "transactionId") String transactionId,
-                                                          @RequestBody MoneyAmountDTO moneyDebitDTO) {
-        return this.accountCommandService.debitMoneyFromWallet(walletOwnerId, transactionId, moneyDebitDTO);
+                                                          @RequestBody MoneyTransactionDTO moneyDebitDTO) {
+        return this.accountCommandService.debitMoneyFromWallet(walletOwnerId, moneyDebitDTO);
     }
 
 
