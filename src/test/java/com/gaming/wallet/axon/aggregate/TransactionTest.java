@@ -39,7 +39,7 @@ public class TransactionTest {
 
 
     @Test
-    public void should_not_dispatch_event_when_transaction_is_already_used() {
+    public void shouldNotDispatchEventWhenTransactionIsAlreadyUsed() {
         CreatedWalletEvent createdWalletEvent = new CreatedWalletEvent(
                 walletId,
                 BigDecimal.valueOf(1000),
@@ -67,7 +67,7 @@ public class TransactionTest {
 
 
     @Test
-    public void should_dispatch_event_when_transaction_is_fresh() {
+    public void shouldDispatchEventWhenTransactionIsFresh() {
         CreatedWalletEvent createdWalletEvent = new CreatedWalletEvent(
                 walletId,
                 BigDecimal.valueOf(1000),

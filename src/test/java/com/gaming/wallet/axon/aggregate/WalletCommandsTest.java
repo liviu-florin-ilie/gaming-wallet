@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-public class WalletCommandsTest {
+public class WalletCommandsTest  {
     private static final String customerName = "XXX";
 
     private FixtureConfiguration<WalletAggregate> fixture;
@@ -25,31 +25,8 @@ public class WalletCommandsTest {
         walletId = "1";
     }
 
-   /* @Test
-    public void testSimpleTradeExecution() {
-        OrderId sellOrder = new OrderId();
-        PortfolioId sellingUser = new PortfolioId();
-        TransactionId sellingTransaction = new TransactionId();
-
-        OrderId buyOrder = new OrderId();
-        TransactionId buyTransactionId = new TransactionId();
-        PortfolioId buyPortfolioId = new PortfolioId();
-
-        CreateSellOrderCommand orderCommand =
-                new CreateSellOrderCommand(sellOrder, sellingUser, orderBookId, sellingTransaction, 100, 100);
-
-        TradeExecutedEvent expectedTradeEvent =
-                new TradeExecutedEvent(orderBookId, 100, 100, buyOrder, sellOrder, buyTransactionId, sellingTransaction);
-
-        fixture.given(orderBookCreatedEvent,
-                new BuyOrderPlacedEvent(orderBookId, buyOrder, buyTransactionId, 200, 100, buyPortfolioId))
-                .when(orderCommand)
-                .expectEvents(new SellOrderPlacedEvent(orderBookId, sellOrder, sellingTransaction, 100, 100, sellingUser),
-                        expectedTradeEvent);
-    }*/
-
     @Test
-    public void should_dispatch_createdwallet_event_when_createawallet_command() {
+    public void shouldDispatchCreatedwalletEventWhenCreatewalletCommand() {
         fixture.givenNoPriorActivity()
                 .when(new CreateWalletCommand(
                         walletId,
@@ -65,7 +42,7 @@ public class WalletCommandsTest {
 
 
     @Test
-    public void should_dispatch_creditedmoney_event() {
+    public void shouldDispatchCreditedmoneyEvent() {
         CreatedWalletEvent createdWalletEvent = new CreatedWalletEvent(
                 walletId,
                 BigDecimal.valueOf(1000),
@@ -85,7 +62,7 @@ public class WalletCommandsTest {
     }
 
     @Test
-    public void should_dispatch_debitedmoney_event_when_balance_is_greater_than_debit_amount() {
+    public void shouldDispatchDebitedmoneyEventWhenBalanceIsGreaterThanDebitAmount() {
         CreatedWalletEvent createdWalletEvent = new CreatedWalletEvent(
                 walletId,
                 BigDecimal.valueOf(1000),
@@ -105,7 +82,7 @@ public class WalletCommandsTest {
     }
 
     @Test
-    public void should_not_dispatch_event_when_balance_is_lower_than_debit_amount() {
+    public void shouldNotDispatchEventWhenBalanceIsLowerThanDebitAmount() {
         fixture.given(new CreatedWalletEvent(
                 walletId,
                 BigDecimal.valueOf(1000),
