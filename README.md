@@ -31,7 +31,7 @@
    * Axon is a lightweight framework that helps in building microservices
     
     
- #  Command examples:
+ #  Command examples
    * Create wallet command:
        
     curl -X POST "http://localhost:8080/wallet" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"initialBalance\": 100, \"username\": \"Player1\"}"
@@ -47,7 +47,7 @@
     curl -X GET "http://localhost:8080/wallet/yourWalletID" -H "accept: */*"
     curl -X GET "http://localhost:8080/wallet/yourWalletID/events" -H "accept: */*"
     
- # What else needs to be done:
+ # What else needs to be done
    * Pagination
    * Logging
    * Security 
