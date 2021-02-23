@@ -7,7 +7,7 @@
              or               
              b. download the jar from https://download.axoniq.io/axonserver/AxonServer.zip 
                 and run it with  java -jar
-        2. start the app with  mvn spring-boot:run from the roor folder
+        2. start the app with  mvn spring-boot:run from the root folder
     
 # Testing 
    * Swagger interface: http://localhost:8080/swagger-ui.html

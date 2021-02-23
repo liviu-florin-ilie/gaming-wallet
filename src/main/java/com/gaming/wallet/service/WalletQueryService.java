@@ -27,12 +27,14 @@ public class WalletQueryService {
     }
 
     public CompletableFuture<List<WalletHistoryDTO>> listEventsForAccount(String walletOwnerId) {
-        List<WalletHistoryDTO> collect = eventStore.readEvents(walletOwnerId).asStream().map(this::domainEventToAggregateHistory).collect(Collectors.toList());
-        return CompletableFuture.supplyAsync(() -> collect);
+        CompletableFuture<List<WalletHistoryDTO>> completableFuture = CompletableFuture.supplyAsync(() ->
+                eventStore.readEvents(walletOwnerId).asStream().map(this::domainEventToAggregateHistory).collect(Collectors.toList())
+        );
+        return completableFuture;
     }
 
-    private WalletHistoryDTO domainEventToAggregateHistory(DomainEventMessage<?> event)
-    {
+
+    private WalletHistoryDTO domainEventToAggregateHistory(DomainEventMessage<?> event) {
         return new WalletHistoryDTO(event.getPayloadType().getSimpleName(), event.getPayload(), event.getTimestamp());
     }
 }

@@ -7,7 +7,7 @@ import java.time.Instant;
 
 @Value
 public class WalletHistoryDTO {
-    private String eventType;
-    private Object event;
-    private Instant timestamp;
+    private final String eventType;
+    private final Object event;
+    private final Instant timestamp;
 }

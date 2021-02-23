@@ -21,7 +21,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class TransactionProjection {
 
     private final TransactionRepository repository;
-    private final List<Transaction> transactions = new CopyOnWriteArrayList<>();
 
     @EventHandler
     public void on(CreditedMoneyEvent evt) {
